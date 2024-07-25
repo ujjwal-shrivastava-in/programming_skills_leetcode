@@ -1,0 +1,40 @@
+class Solution {
+public:
+
+    void setAllHorizontalAndVerticalZeroes(vector<vector<int>> &matrix, int i,int j){
+        //index for horizontal start i.e the leftmost index of i,j in horizontal plane of matrix
+        int leftMostI = i;// because leftMostJ will be 0 for the horizontal start
+
+        //index for vertical start i.e the topmost index of i,j in vertical plane of matrix
+        int topMostJ = j; // because topMostI will be 0 for the vertical start
+
+        // first change all the horizontal plane to zero
+        int horizontalSize = matrix[0].size();
+        for(int i=0;i<horizontalSize;i++){
+            matrix[leftMostI][i] = 0;
+        }
+
+        // now change all the vertical plane to zero
+        int verticalSize = matrix.size();
+        for(int i=0;i<verticalSize;i++){
+            matrix[i][topMostJ] = 0;
+        }
+
+    }
+
+    void setZeroes(vector<vector<int>>& matrix) {
+        // first we have to duplicate matrix
+        vector<vector<int>> duplicate = matrix;
+
+        for(int i=0;i<matrix.size();i++){
+            for(int j=0;j<matrix[i].size();j++){
+                if(matrix[i][j] == 0){
+                    //making all changes to duplicate matrix
+                    setAllHorizontalAndVerticalZeroes(duplicate,i,j);
+                }
+            }
+        }
+        // now assigning updated duplicate matrix to our own matrix
+        matrix = duplicate;
+    }
+};
