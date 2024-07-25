@@ -1,0 +1,61 @@
+class Solution {
+public:
+    string checkWinner(char c){
+        if(c=='X') return "A";
+        else return "B";
+    }
+
+
+    string tictactoe(vector<vector<int>>& moves) {
+        char arr[3][3] = {{'1','1','1'},{'1','1','1'},{'1','1','1'}};
+
+        // for A
+        for(int i=0;i<moves.size();){
+            int firstIndex = moves[i][0];
+            int secondIndex = moves[i][1];
+            arr[firstIndex][secondIndex] = 'X';
+            i+=2;
+        }
+
+        // for B
+        for(int i=1;i<moves.size();){
+            int firstIndex = moves[i][0];
+            int secondIndex = moves[i][1];
+            arr[firstIndex][secondIndex] = 'O';
+            i+=2;
+        }
+
+        char winner = ' ';
+
+        // first check all the horizontals
+        for(int i=0;i<3;i++){
+            if(arr[i][0] == arr[i][1] && arr[i][1] == arr[i][2]){
+                winner = arr[i][0];
+                if(winner != '1') return checkWinner(winner);
+            }
+        }
+
+        // now all the verticals
+        for(int i=0;i<3;i++){
+            if(arr[0][i] == arr[1][i] && arr[1][i] == arr[2][i]){
+                winner = arr[0][i];
+                if(winner != '1') return checkWinner(winner);
+            }
+        }
+
+        // first slash / diagonal
+        if(arr[0][0] == arr[1][1] && arr[1][1] == arr[2][2]){
+            winner = arr[0][0];
+            if(winner != '1') return checkWinner(winner);
+        }
+
+        // now slash \ diagonal
+        if(arr[0][2] == arr[1][1] && arr[1][1] == arr[2][0]){
+            winner = arr[0][2];
+            if(winner != '1') return checkWinner(winner);
+        }
+
+        if(moves.size()==9) return "Draw";
+        return "Pending";
+    }
+};
