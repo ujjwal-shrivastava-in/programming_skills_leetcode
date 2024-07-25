@@ -1,0 +1,45 @@
+class Solution {
+public:
+    vector<int> spiralOrder(vector<vector<int>>& matrix) {
+        vector<int> spiralTraversal;
+
+        if (matrix.empty()) return spiralTraversal;
+
+        int top = 0,left = 0;
+        int right = matrix[0].size()-1,bottom = matrix.size()-1;
+
+        while(top <= bottom && left <= right){
+
+            // first moving from top left to right for the top horizontal plane elements
+            for(int i=left;i<=right;i++){
+                spiralTraversal.push_back(matrix[top][i]);
+            }
+            top++;
+
+            // now moving from top right to bottom for vertical plane elements
+            for(int i=top;i<=bottom;i++){
+                spiralTraversal.push_back(matrix[i][right]);
+            }
+            right--;
+
+            if(top <= bottom){
+                // now moving from right to left bottom for vertical bottom plane elements
+                for(int i=right;i>=left;i--){
+                    spiralTraversal.push_back(matrix[bottom][i]);
+                }
+                bottom--;
+            }
+
+            if(left <= right){
+                // now moving from bottom to top from vertical left most plane elements
+                for(int i=bottom;i>=top;i--){
+                    spiralTraversal.push_back(matrix[i][left]);
+                }
+                left++;
+            }
+            
+        }
+
+        return spiralTraversal;
+    }
+};
