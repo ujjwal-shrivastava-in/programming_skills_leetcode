@@ -1,0 +1,27 @@
+class Solution {
+public:
+    vector<int> plusOne(vector<int>& digits) {
+        if(digits[digits.size()-1] < 9){
+            digits[digits.size()-1]++;
+            return digits;
+        }
+        int carry = 1;
+        int i=digits.size()-1;
+        while(carry!=0){
+            if(digits[i]>8){
+                digits[i] = 0;
+                carry = 1;
+            }else{
+                carry = 0;
+                digits[i]+=carry;
+            }
+        }
+        if(carry == 1){
+            vector<int> ans;
+            ans.push_back(1);
+            ans.insert(ans.end(),digits.begin(),digits.end());
+            return ans;
+        }
+        return digits;
+    }
+};
