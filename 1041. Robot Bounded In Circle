@@ -1,0 +1,31 @@
+class Solution {
+public:
+    bool isRobotBounded(string instructions) {
+        char curr_dir = 'N';
+        int x=0,y=0;
+
+        for(int i=0;i<instructions.length();i++){
+            char c = instructions[i];
+            if(c == 'G'){
+                if(curr_dir == 'N') y+=1;
+                if(curr_dir == 'S') y-=1;
+                if(curr_dir == 'E') x+=1;
+                if(curr_dir == 'W') x-=1;
+            }else{
+                if(curr_dir == 'N'){
+                    curr_dir = c == 'L' ? 'W' : 'E';
+                }else if(curr_dir == 'S'){
+                    curr_dir = c == 'L' ? 'E' : 'W';
+                }else if(curr_dir == 'E'){
+                    curr_dir = c == 'L' ? 'N' : 'S';
+                }else if(curr_dir == 'W'){
+                    curr_dir = c == 'L' ? 'S' : 'N';
+                }
+            }
+        }
+
+        if(x == 0 && y == 0 || curr_dir != 'N'){
+            return true;
+        }else return false;
+    }
+};
