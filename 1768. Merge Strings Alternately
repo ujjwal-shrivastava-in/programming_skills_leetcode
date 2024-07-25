@@ -1,0 +1,47 @@
+class Solution {
+public:
+    string mergeAlternately(string word1, string word2) {
+        string ans,bigStr,smaStr;
+
+        // first finding the longer string
+        if(word1.length()>=word2.length()){
+            bigStr = word1;
+            smaStr = word2;
+        }
+        else{
+            bigStr = word2;
+            smaStr = word1;
+        } 
+
+        // then check small string is word1 or word2
+
+        if(smaStr == word1){
+            // start with small string 
+            int i=0;
+            for(i;i<smaStr.length();i++){
+                ans.push_back(smaStr[i]);
+                ans.push_back(bigStr[i]);
+            }
+
+            while(i<bigStr.length()){
+                ans.push_back(bigStr[i]);
+                i++;
+            }
+        }
+        else{
+            // start with big string
+            int i=0;
+            for(i;i<smaStr.length();i++){
+                ans.push_back(bigStr[i]);
+                ans.push_back(smaStr[i]);
+            }
+
+            while(i<bigStr.length()){
+                ans.push_back(bigStr[i]);
+                i++;
+            }
+        }
+        return ans;
+        
+    }
+};
