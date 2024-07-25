@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int lengthOfLastWord(string s) {
+        string word = "";
+        vector<string> v;
+        for(auto x: s){
+            
+            if(isalpha(x)){
+                word = word+x;
+            }else if(x == ' '){
+                if(word.length()>0){
+                    v.push_back(word);
+                    word = "";
+                }
+            }
+
+        }
+        if(word.length()>0) v.push_back(word);
+
+        return v[v.size()-1].length();
+    }
+};
