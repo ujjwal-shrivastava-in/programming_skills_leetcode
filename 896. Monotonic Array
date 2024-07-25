@@ -1,0 +1,17 @@
+class Solution {
+public:
+    bool isMonotonic(vector<int>& nums) {
+
+        vector<int> ascending = nums;
+        vector<int> descending = nums;
+
+        sort(ascending.begin(),ascending.end());
+        sort(descending.begin(),descending.end(),greater<int>());
+
+        if(ascending != nums && descending != nums){
+            return false;
+        }
+        return true;
+        
+    }
+};
